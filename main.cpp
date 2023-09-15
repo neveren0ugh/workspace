@@ -1,18 +1,18 @@
 #include <iostream>
-#include <new>
+#include <cstdlib>
 
 using namespace std;
 
-int main() {
-
-   double **p = 0;
-   p = new double*;
-   *p = new double;
-   **p = 2;
-   cout << **p << endl;
-   delete *p;
-   delete p;
-
-
+int main()
+{
+    int arr[5], size_arr, arr3[5], counter;
+    cout << size(arr) << '\n';
+    size_arr = 5;
+    int * arr1 =(int*) calloc(size_arr, sizeof(int));
+    int * arr2 = (int*) malloc(size_arr);
+    int sum = 0;
+    for (counter = 0; counter < 5; counter++){
+        cin >> arr3[counter];
+    }
     return 0;
 }
