@@ -1,0 +1,81 @@
+#include <iostream>
+#include <string>
+#include <random>
+#include <windows.h>
+#include <locale>
+
+using namespace std;
+
+class Dictionary {
+private:
+string dict[10] = {"скатерть", "колоритный", "болгары", "встряхнуться", "ежевика", "конгломерат", "луговина", "сортировать", "портфель", "тесина"};
+public:
+string get_random_word();
+};
+
+string Dictionary::get_random_word() {
+    random_device rd;
+    return dict[rd() % 10 + 1];
+}
+
+
+class Game {
+private:
+    Dictionary word;
+public:
+    void pole_chudes();
+};
+
+void Game::pole_chudes() {
+    Dictionary word;
+    string to_guess = word.get_random_word(), current;
+    int size = to_guess.size();
+    string hyp = "-", attempt;
+    bool is_solved = false, met_letter = false;
+    for (int tmp = size; tmp > 0; tmp--) {
+        current += hyp;
+    }
+    cout << current << "\n";
+    cout << "Введите букву:\n";
+
+    while (!is_solved) {
+        int tmp = size;
+        cin >> attempt;
+        if (attempt.size() != 1) {
+            cout << "Вводите по одной букве!\n";
+        }
+        else {
+            for (tmp; tmp > -1; tmp--) {
+                if (to_guess[tmp] == attempt[0]) {
+                    current[tmp] = attempt[0];
+                    met_letter = true;
+                }
+            }
+            if (!met_letter) {
+                cout << "Такой буквы нет!\n";
+            }
+            else {
+                cout << "Такая буква есть в слове!\n";
+                cout << current << "\n";
+            }
+            met_letter = false;
+        }
+        is_solved = true;
+        tmp = size;
+        for (tmp; tmp > -1; tmp--) {
+            if (current[tmp] == hyp[0]){
+                is_solved = false;
+            }
+        }
+    }
+    cout << "Вы угадали слово!";
+}
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    setlocale(LC_ALL, "russian");
+    Game lets_play;
+    lets_play.pole_chudes();
+    return 0;
+}
