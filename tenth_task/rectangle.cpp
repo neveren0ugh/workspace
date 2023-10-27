@@ -6,7 +6,7 @@ using namespace std;
 class Coordinate {
 public:
     double x, y;
-    Coordinate() {x = 0, y = 0;};
+    Coordinate() { x = 0, y = 0; };
     Coordinate(double x_ax, double y_ax) {
         x = x_ax;
         y = y_ax;
@@ -26,7 +26,7 @@ private:
     Coordinate top_left{};
     Coordinate top_right{};
 public:
-    Rectangle() {0;};
+    Rectangle() { 0; };
     Rectangle(Coordinate bot_left, Coordinate t_right) {
         bottom_left = bot_left;
         top_right = t_right;
@@ -61,19 +61,47 @@ public:
     Coordinate get_right_top() {
         return top_right;
     }
+    void overlap(Rectangle second) {
+        if (in_rectangle(second.get_left_bottom())) {
+            cout << "Rectangles do overlap";
+            exit(0);
+        }
+        if (in_rectangle(second.get_left_top())) {
+            cout << "Rectangles do overlap";
+            exit(0);
+        }
+        if (in_rectangle(second.get_right_bottom())) {
+            cout << "Rectangles do overlap";
+            exit(0);
+        }
+        if (in_rectangle(second.get_right_top())) {
+            cout << "Rectangles do overlap";
+            exit(0);
+        }
+        if (second.in_rectangle(get_left_bottom())) {
+            cout << "Rectangles do overlap";
+            exit(0);
+        }
+        if (second.in_rectangle(get_left_top())) {
+            cout << "Rectangles do overlap";
+            exit(0);
+        }
+        if (second.in_rectangle(get_right_bottom())) {
+            cout << "Rectangles do overlap";
+            exit(0);
+        }
+        if (second.in_rectangle(get_right_top())) {
+            cout << "Rectangles do overlap";
+            exit(0);
+        }
+        cout << "Rectangles do not overlap";
+    }
 };
 
 
 int main() {
-    Coordinate check(1, 1), lb1(0, 0), rt1(6, 5), lb2(-1, -1), rt2(10, 10);
+    Coordinate lb1(0, 0), rt1(6, 5), lb2(1, 1), rt2(2, 2);
     Rectangle first(lb1, rt1), second(lb2, rt2);
-    if (first.in_rectangle(second.get_left_bottom()))
-        cout << "Rectangles do overlap";
-    if (first.in_rectangle(second.get_left_top()))
-        cout << "Rectangles do overlap";
-    if (first.in_rectangle(second.get_right_bottom()))
-        cout << "Rectangles do overlap";
-    if (first.in_rectangle(second.get_right_top()))
-        cout << "Rectangles do overlap";
+    first.overlap(second);
     return 0;
 }
