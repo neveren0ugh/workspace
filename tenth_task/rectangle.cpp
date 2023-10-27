@@ -1,41 +1,13 @@
-#include <iostream>
+#include "rectangle.h"
 #include <cmath>
+#include "coordinate.h"
 
 using namespace std;
+using namespace coord;
+using namespace rect;
 
-class Coordinate {
-public:
-    double x, y;
-    Coordinate() { x = 0, y = 0; };
-    Coordinate(double x_ax, double y_ax) {
-        x = x_ax;
-        y = y_ax;
-    }
-    double get_x() {
-        return x;
-    }
-    double get_y() {
-        return y;
-    }
-};
-
-class Rectangle {
-private:
-    Coordinate bottom_left{};
-    Coordinate bottom_right{};
-    Coordinate top_left{};
-    Coordinate top_right{};
-public:
-    Rectangle() { 0; };
-    Rectangle(Coordinate bot_left, Coordinate t_right) {
-        bottom_left = bot_left;
-        top_right = t_right;
-        bottom_right.y = bot_left.y;
-        bottom_right.x = t_right.x;
-        top_left.x = bot_left.x;
-        top_left.y = t_right.y;
-    }
-    bool in_rectangle(Coordinate point) {
+rectangle::rectangle(coordinate bot_left, coordinate t_right) : bottom_left(bot_left), top_right(t_right), bottom_right(t_right.x, bot_left.y), top_left(bot_left.x, t_right.y) {}
+    bool rectangle::in_rectangle(coordinate point) {
         if ((abs(point.x - top_right.x) < 1e-6) and (abs(point.y - top_right.y) < 1e-6))
             return true;
         if ((abs(point.x - top_left.x) < 1e-6) and (abs(point.y - top_left.y) < 1e-6))
@@ -46,62 +18,50 @@ public:
             return true;
         return ((point.x < top_right.x) and (point.x > top_left.x) and (point.y < top_left.y) and (point.y > bottom_left.y));
     }
-    void print() {
-        cout << bottom_left.x << bottom_left.y << bottom_right.x << bottom_right.y << top_left.x << top_left.y << top_right.x << top_right.y << "\n";
+    coordinate rectangle::get_left_bottom() {
+        return rectangle::bottom_left;
     }
-    Coordinate get_left_bottom() {
-        return bottom_left;
+    coordinate rectangle::get_right_bottom() {
+        return rectangle::bottom_right;
     }
-    Coordinate get_right_bottom() {
-        return bottom_right;
+    coordinate rectangle::get_left_top() {
+        return rectangle::top_left;
     }
-    Coordinate get_left_top() {
-        return top_left;
+    coordinate rectangle::get_right_top() {
+        return rectangle::top_right;
     }
-    Coordinate get_right_top() {
-        return top_right;
-    }
-    void overlap(Rectangle second) {
+    void rectangle::overlap(rectangle second) {
         if (in_rectangle(second.get_left_bottom())) {
-            cout << "Rectangles do overlap";
+            cout << "rectangles do overlap";
             exit(0);
         }
         if (in_rectangle(second.get_left_top())) {
-            cout << "Rectangles do overlap";
+            cout << "rectangles do overlap";
             exit(0);
         }
         if (in_rectangle(second.get_right_bottom())) {
-            cout << "Rectangles do overlap";
+            cout << "rectangles do overlap";
             exit(0);
         }
         if (in_rectangle(second.get_right_top())) {
-            cout << "Rectangles do overlap";
+            cout << "rectangles do overlap";
             exit(0);
         }
         if (second.in_rectangle(get_left_bottom())) {
-            cout << "Rectangles do overlap";
+            cout << "rectangles do overlap";
             exit(0);
         }
         if (second.in_rectangle(get_left_top())) {
-            cout << "Rectangles do overlap";
+            cout << "rectangles do overlap";
             exit(0);
         }
         if (second.in_rectangle(get_right_bottom())) {
-            cout << "Rectangles do overlap";
+            cout << "rectangles do overlap";
             exit(0);
         }
         if (second.in_rectangle(get_right_top())) {
-            cout << "Rectangles do overlap";
+            cout << "rectangles do overlap";
             exit(0);
         }
-        cout << "Rectangles do not overlap";
+        cout << "rectangles do not overlap";
     }
-};
-
-
-int main() {
-    Coordinate lb1(0, 0), rt1(6, 5), lb2(1, 1), rt2(2, 2);
-    Rectangle first(lb1, rt1), second(lb2, rt2);
-    first.overlap(second);
-    return 0;
-}
