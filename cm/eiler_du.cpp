@@ -21,12 +21,18 @@ int main() {
     for (int i = 0; i < amount + 1; i++) {
         knots[i] = step * i;
     }
+
     solution_grid[0] = 1.;
     solution_grid_der[0] = 1.;
     sg1[0] = 1.;
     sgd1[0] = 1.;
     sg2[0] = 1.;
     sgd2[0] = 1.;
+    sg2[1] = 1.04871;
+    sgd2[1] = 0.947527;
+    sg2[2] = 1.09467;
+    sgd2[2] = 0.890266;
+
     solver(solution_grid_der,solution_grid, knots, step, amount);
     solver_runge(knots, sg1, sgd1, amount, step);
     solver_ad(knots, sg2, sgd2, amount, step);
