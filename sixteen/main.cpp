@@ -35,7 +35,7 @@ std::map<char, unsigned int> analyse(std::string root, std::string alphabet){
     std::string text;
     std::ifstream file(root);
 
-    while(std::getline(file, text)){ 
+    while(std::getline(file, text)){
         transform(text.begin(), text.end(), text.begin(), tolower);
         for(int i = 0; i <= text.size(); i++){
             if(isalpha(alphabet, (char)text[i])){
@@ -44,7 +44,7 @@ std::map<char, unsigned int> analyse(std::string root, std::string alphabet){
         }
     }
 
-    file.close(); 
+    file.close();
 
     std::vector<std::pair<char, unsigned int>> top10 = findtop(res);
 
@@ -65,12 +65,12 @@ int main(){
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    std::string tom1 = "C:\\Users\\merku\\Desktop\\PL\\16-WAP\\tom1.txt";
-    std::string tom2 = "C:\\Users\\merku\\Desktop\\PL\\16-WAP\\tom2.txt";
-    std::string tom3 = "C:\\Users\\merku\\Desktop\\PL\\16-WAP\\tom3.txt";
-    std::string tom4 = "C:\\Users\\merku\\Desktop\\PL\\16-WAP\\tom4.txt";
+    std::string tom1 = "C:\\Users\\dkarm\\Downloads\\tom1.txt";
+    std::string tom2 = "C:\\Users\\dkarm\\Downloads\\tom2.txt";
+    std::string tom3 = "C:\\Users\\dkarm\\Downloads\\tom3.txt";
+    std::string tom4 = "C:\\Users\\dkarm\\Downloads\\tom4.txt";
 
-    std::string alphabet = "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùúûüýþÿ";
+    std::string alphabet = "йцукенгшщзхъфывапролджэячсмитьбюё";
     std::cout << "volume 1:" << std::endl;
     analyse(tom1, alphabet);
     std::cout << "volume 2:" << std::endl;
