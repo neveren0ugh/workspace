@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -75,5 +75,7 @@ int main(int argc, char* argv[])
 		}
 		ff.close();
 	}
+	/*char hih = 65;
+	cout << hih << endl;*/
 	return 0;
 }
