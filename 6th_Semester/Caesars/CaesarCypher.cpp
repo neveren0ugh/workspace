@@ -21,6 +21,8 @@ int main(int argc, char* argv[])
 		cin.ignore();
 		cout << "invalid input, please enter integer value.\n";
 	}
+	if ((enc_lvl > 26) || (enc_lvl < -26))
+		enc_lvl = enc_lvl % 26;
 
     ifstream f("input.txt");
 	string line = *argv;
@@ -36,11 +38,20 @@ int main(int argc, char* argv[])
 			return 0;
 		}
 		for (int i = 0; i < argc; i++) {
-			if (isalpha((int)argv[i])) {
-				if (islower((int)argv[i]))
-					line[i] = ((int)argv[i] + enc_lvl - 97) % 26 + 97; // encryption
-				else
-					line[i] = ((int)argv[i] + enc_lvl - 65) % 26 + 65; // encryption
+			if (isalpha(atoi(argv[i]))) {
+				if (islower(atoi(argv[i]))) {
+					if (enc_lvl < 0) {
+						line[i] = (atoi(argv[i]) + enc_lvl - 71) % 26 + 97;
+					}
+					else
+						line[i] = (atoi(argv[i]) + enc_lvl - 97) % 26 + 97; // encryption
+				}
+				else {
+					if (enc_lvl < 0)
+						line[i] = (atoi(argv[i]) + enc_lvl - 39) % 26 + 65;
+					else
+						line[i] = (atoi(argv[i]) + enc_lvl - 65) % 26 + 65; // encryption
+				}
 			}
 			cout << line[i];
 		}
@@ -51,10 +62,18 @@ int main(int argc, char* argv[])
 			getline(f, tmp);
 			for (int i = 0; i < tmp.length(); i++) {
 				if (isalpha(tmp[i])) {
-					if (islower(tmp[i]))
-						tmp[i] = (tmp[i] + enc_lvl - 97) % 26 + 97; // encryption
-					else
-						tmp[i] = (tmp[i] + enc_lvl - 65) % 26 + 65; // encryption
+					if (islower(tmp[i])) {
+						if (enc_lvl < 0)
+							tmp[i] = (tmp[i] + enc_lvl - 71) % 26 + 97;
+						else
+							tmp[i] = (tmp[i] + enc_lvl - 97) % 26 + 97; // encryption
+					}
+					else {
+						if (enc_lvl < 0)
+							tmp[i] = (tmp[i] + enc_lvl - 39) % 26 + 65;
+						else
+							tmp[i] = (tmp[i] + enc_lvl - 65) % 26 + 65; // encryption
+					}
 				}
 
 			}
